@@ -30,6 +30,9 @@ class MailboxViewController: UIViewController {
     var messageOffset: CGFloat!
     var messageClose: CGPoint!
     var contentOriginalCenter: CGPoint!
+    var mailViewOriginalCenter: CGPoint!
+    var laterViewOriginalCenter: CGPoint!
+    var archiveViewOriginalCenter: CGPoint!
 
 
     override func viewDidLoad() {
@@ -45,6 +48,9 @@ class MailboxViewController: UIViewController {
         laterIconOriginalCenter = laterIconImageView.center
         archiveIconOriginalCenter = archiveIconImageView.center
         contentOriginalCenter = contentView.center
+        mailViewOriginalCenter = mailView.center
+        laterViewOriginalCenter = laterView.center
+        archiveViewOriginalCenter = archiveView.center
         
         // Add a screen edge gesture recognizer with a left edge to view.
         let edgeGesture = UIScreenEdgePanGestureRecognizer(target: self, action: "onEdgePan:")
@@ -72,19 +78,42 @@ class MailboxViewController: UIViewController {
     @IBAction func changeViews(sender: AnyObject) {
         
         if Controller.selectedSegmentIndex == 0 {
-            mailView.alpha = 0
-            laterView.alpha = 1
-            archiveView.alpha = 0
+            self.laterView.alpha = 1
+            UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
+                self.mailView.center = CGPoint(x: self.mailViewOriginalCenter.x - 320, y:self.mailViewOriginalCenter.y)
+                self.archiveView.center = CGPoint(x: self.archiveViewOriginalCenter.x - 320, y:self.archiveViewOriginalCenter.y)
+
+                }, completion: {(Bool) -> Void in
+                    self.mailView.alpha = 0
+                    self.archiveView.alpha = 0
+                    self.laterView.center = CGPoint(x: self.laterViewOriginalCenter.x, y:self.laterViewOriginalCenter.y)
+            })
         }
         if Controller.selectedSegmentIndex == 1 {
-            mailView.alpha = 1
-            laterView.alpha = 0
-            archiveView.alpha = 0
+            self.mailView.alpha = 1
+            UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
+                self.laterView.center = CGPoint(x: self.laterViewOriginalCenter.x - 320, y:self.laterViewOriginalCenter.y)
+                self.archiveView.center = CGPoint(x: self.archiveViewOriginalCenter.x - 320, y:self.archiveViewOriginalCenter.y)
+                
+                }, completion: {(Bool) -> Void in
+                    self.laterView.alpha = 0
+                    self.archiveView.alpha = 0
+                    self.mailView.center = CGPoint(x: self.mailView.center.x + 320, y:self.mailViewOriginalCenter.y)
+            })
+
         }
         if Controller.selectedSegmentIndex == 2 {
-            mailView.alpha = 0
-            laterView.alpha = 0
-            archiveView.alpha = 1
+            self.archiveView.alpha = 1
+            UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
+                self.mailView.center = CGPoint(x: self.mailViewOriginalCenter.x - 320, y:self.mailViewOriginalCenter.y)
+                self.laterView.center = CGPoint(x: self.laterViewOriginalCenter.x - 320, y:self.laterViewOriginalCenter.y)
+                
+                }, completion: {(Bool) -> Void in
+                    self.laterView.alpha = 0
+                    self.mailView.alpha = 0
+                    self.archiveView.center = CGPoint(x: self.archiveViewOriginalCenter.x, y:self.archiveViewOriginalCenter.y)
+            })
+
         }
     }
     

@@ -212,10 +212,10 @@
             </objects>
             <point key="canvasLocation" x="566" y="357"/>
         </scene>
-        <!--View Controller-->
+        <!--Compose View Controller-->
         <scene sceneID="MGE-Qo-A7e">
             <objects>
-                <viewController id="7zo-mN-CLX" sceneMemberID="viewController">
+                <viewController id="7zo-mN-CLX" customClass="ComposeViewController" customModule="Mailbox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kUK-Sk-qIb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -233,10 +233,21 @@
                                     <segue destination="6qf-y8-jef" kind="modal" animates="NO" id="EQ7-7o-xfK"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" id="oTD-Zy-YbR">
+                                <rect key="frame" x="12" y="205" width="288" height="307"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="oTD-Zy-YbR" id="HJw-re-tmQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bBz-EG-IDl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
